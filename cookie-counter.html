@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    body {
+      font-family: sans-serif;
+      text-align: center;
+      padding: 10px;
+    }
+    #counter {
+      font-size: 28px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div id="counter">🍪 Loading...</div>
+
+  <script>
+    const key = 'mazeofdragons_cookie_count';
+    let count = localStorage.getItem(key);
+    count = count ? parseInt(count) : 0;
+    count += 1;
+    localStorage.setItem(key, count);
+    document.getElementById('counter').textContent = `🍪 Cookies Collected: ${count}`;
+  </script>
+</body>
+</html>
