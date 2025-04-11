@@ -23,13 +23,25 @@
   <div id="counter">🍪 Loading cookies...</div>
 
   <script>
-    const key = 'mazeofdragons_cookie_count';
+    const cookieKey = 'mazeofdragons_cookie_count';
+    const visitedPagesKey = 'mazeofdragons_visited_pages';
 
     try {
-      let count = localStorage.getItem(key);
+      let count = localStorage.getItem(cookieKey);
       count = count ? parseInt(count, 10) : 0;
-      count += 1;
-      localStorage.setItem(key, count);
+
+      let visited = localStorage.getItem(visitedPagesKey);
+      visited = visited ? JSON.parse(visited) : [];
+
+      const currentPage = location.pathname;
+
+      if (!visited.includes(currentPage)) {
+        count += 100; // 🎉 first time on this page
+        visited.push(currentPage);
+        localStorage.setItem(visitedPagesKey, JSON.stringify(visited));
+      }
+
+      localStorage.setItem(cookieKey, count);
       document.getElementById('counter').textContent = `🍪 Cookies Collected: ${count}`;
     } catch (e) {
       document.getElementById('counter').textContent = '🍪 Error: Cookies disabled or unsupported';
