@@ -4,23 +4,35 @@
   <meta charset="UTF-8" />
   <title>Cookie Counter</title>
   <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: transparent;
+    }
+
     body {
       font-family: Arial, sans-serif;
       text-align: center;
-      padding: 10px;
-      background-color: #fff8e1;
+      font-size: 12px;
+      color: #6d4c41;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      width: 100%;
     }
 
     #counter {
-      font-size: 14px;  /* Even smaller font size */
-      font-weight: bold;
-      color: #6d4c41;
-      margin-top: 10px;
+      padding: 2px 6px;
+      background: #fff8e1;
+      border: 1px solid #d7ccc8;
+      border-radius: 8px;
+      box-shadow: 0 0 2px rgba(0,0,0,0.1);
     }
   </style>
 </head>
 <body>
-  <div id="counter">🍪 Loading cookies...</div>
+  <div id="counter">🍪 Loading...</div>
 
   <script>
     const cookieKey = 'mazeofdragons_cookie_count';
@@ -35,10 +47,8 @@
 
       const currentPage = location.pathname;
 
-      // Always add +1 per page view
       count += 1;
 
-      // If first time visiting this unique page, add bonus +100
       if (!visited.includes(currentPage)) {
         count += 100;
         visited.push(currentPage);
@@ -46,10 +56,9 @@
       }
 
       localStorage.setItem(cookieKey, count);
-      document.getElementById('counter').textContent = `🍪 Cookies Collected: ${count}`;
+      document.getElementById('counter').textContent = `🍪 ${count}`;
     } catch (e) {
-      document.getElementById('counter').textContent = '🍪 Error: Cookies disabled or unsupported';
-      console.error('Cookie counter error:', e);
+      document.getElementById('counter').textContent = '🍪 Error';
     }
   </script>
 </body>
