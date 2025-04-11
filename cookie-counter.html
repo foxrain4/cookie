@@ -14,6 +14,7 @@
       font-size: 30px;
       font-weight: bold;
       color: #6d4c41;
+      margin-top: 20px;
     }
   </style>
 </head>
@@ -22,4 +23,18 @@
   <div id="counter">🍪 Loading cookies...</div>
 
   <script>
-    const
+    const key = 'mazeofdragons_cookie_count';
+
+    try {
+      let count = localStorage.getItem(key);
+      count = count ? parseInt(count, 10) : 0;
+      count += 1;
+      localStorage.setItem(key, count);
+      document.getElementById('counter').textContent = `🍪 Cookies Collected: ${count}`;
+    } catch (e) {
+      document.getElementById('counter').textContent = '🍪 Error: Cookies disabled or unsupported';
+      console.error('Cookie counter error:', e);
+    }
+  </script>
+</body>
+</html>
