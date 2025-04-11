@@ -44,24 +44,12 @@
 
   <script>
     const cookieKey = 'mazeofdragons_cookie_count';
-    const visitedPagesKey = 'mazeofdragons_visited_pages';
 
     try {
       let count = localStorage.getItem(cookieKey);
       count = count ? parseInt(count, 10) : 0;
 
-      let visited = localStorage.getItem(visitedPagesKey);
-      visited = visited ? JSON.parse(visited) : [];
-
-      const currentPage = location.pathname;
-
       count += 1;
-
-      if (!visited.includes(currentPage)) {
-        count += 100;
-        visited.push(currentPage);
-        localStorage.setItem(visitedPagesKey, JSON.stringify(visited));
-      }
 
       localStorage.setItem(cookieKey, count);
       document.getElementById('counter').textContent = `🍪 ${count}`;
