@@ -1,30 +1,65 @@
-<script>
-  const cookieKey = 'mazeofdragons_cookie_count';
-  const visitedPagesKey = 'mazeofdragons_visited_pages';
-
-  try {
-    let count = localStorage.getItem(cookieKey);
-    count = count ? parseInt(count, 10) : 0;
-
-    let visited = localStorage.getItem(visitedPagesKey);
-    visited = visited ? JSON.parse(visited) : [];
-
-    const currentPage = location.pathname;
-
-    // Always add +1 per page view
-    count += 1;
-
-    // If first time visiting this unique page, add bonus +100
-    if (!visited.includes(currentPage)) {
-      count += 100;
-      visited.push(currentPage);
-      localStorage.setItem(visitedPagesKey, JSON.stringify(visited));
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Cookie Counter</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 20px;
+      background: linear-gradient(45deg, #3e3e3e, #1b1b1b); /* Maze-like dark background */
+      background-size: cover;
+      color: #f1f1f1;
     }
 
-    localStorage.setItem(cookieKey, count);
-    document.getElementById('counter').textContent = `🍪 Cookies Collected: ${count}`;
-  } catch (e) {
-    document.getElementById('counter').textContent = '🍪 Error: Cookies disabled or unsupported';
-    console.error('Cookie counter error:', e);
-  }
-</script>
+    #counter {
+      font-size: 18px;  /* Smaller font size */
+      font-weight: bold;
+      color: #f9a825;   /* Goldish cookie color */
+      margin-top: 20px;
+    }
+
+    h1 {
+      font-size: 24px;  /* Smaller header */
+      color: #e1b100;
+      text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5); /* Glowing effect */
+    }
+  </style>
+</head>
+<body>
+  <h1>Welcome to Maze of Dragons 🍪</h1>
+  <div id="counter">🍪 Loading cookies...</div>
+
+  <script>
+    const cookieKey = 'mazeofdragons_cookie_count';
+    const visitedPagesKey = 'mazeofdragons_visited_pages';
+
+    try {
+      let count = localStorage.getItem(cookieKey);
+      count = count ? parseInt(count, 10) : 0;
+
+      let visited = localStorage.getItem(visitedPagesKey);
+      visited = visited ? JSON.parse(visited) : [];
+
+      const currentPage = location.pathname;
+
+      // Always add +1 per page view
+      count += 1;
+
+      // If first time visiting this unique page, add bonus +100
+      if (!visited.includes(currentPage)) {
+        count += 100;
+        visited.push(currentPage);
+        localStorage.setItem(visitedPagesKey, JSON.stringify(visited));
+      }
+
+      localStorage.setItem(cookieKey, count);
+      document.getElementById('counter').textContent = `🍪 Cookies Collected: ${count}`;
+    } catch (e) {
+      document.getElementById('counter').textContent = '🍪 Error: Cookies disabled or unsupported';
+      console.error('Cookie counter error:', e);
+    }
+  </script>
+</body>
+</html>
